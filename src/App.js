@@ -38,15 +38,12 @@ export default function App() {
   };
 
   const onDelete = (id) => {
-    for (let i = 0; i < contacts.length; i += 1) {
-      if (contacts[i].id === id) {
-        const name = contacts[i].name;
-        contacts.splice(i, 1);
-        setContacts([...contacts]);
-        toastMsg(name, "info");
-        break;
-      }
-    }
+    setContacts(
+      contacts.filter((contact) => {
+        if (contact.id === id) toastMsg(contact.name, "info");
+        return contact.id !== id;
+      })
+    );
 
     if (contacts.length <= 1) {
       onFilter();
