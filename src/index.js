@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 import { IconContext } from "react-icons";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./constants/Theme";
@@ -14,7 +16,9 @@ ReactDOM.render(
           style: { verticalAlign: "middle", marginRight: "8px" },
         }}
       >
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </IconContext.Provider>
     </ThemeProvider>
   </React.StrictMode>,

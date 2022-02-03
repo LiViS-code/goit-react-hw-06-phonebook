@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://LiViS-code.github.io/goit-react-hw-06-phonebook",
   "dependencies": {
-    "@reduxjs/toolkit": "^1.7.1",
+    "@reduxjs/toolkit": "^1.7.2",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -21,6 +21,7 @@
     "react-scripts": "5.0.0",
     "react-toastify": "^8.1.0",
     "redux": "^4.1.2",
+    "redux-persist": "^6.0.0",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.2"
   },
