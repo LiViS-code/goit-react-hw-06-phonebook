@@ -1,26 +1,33 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
-import { nanoid } from "nanoid";
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
 import Filter from "./components/Filter/Filter";
 import { Container, Logo, Title, ContactsTitle, Message } from "./App.styled";
 import toastMsg from "./utils/toastMsg";
 import phonebook from "./img/phonebook.png";
+import { deleteContact } from "./redux/actions";
 
 export default function App() {
-  const [contacts, setContacts] = useState([]);
-  const [filter, setFilter] = useState("");
+  const dispatch = useDispatch();
+
+  const contacts = useSelector((state) => state.contacts);
+  const filter = useSelector((state) => state.contacts.filter);
+
+  console.log("contacts", contacts);
+
+  // const onContactsGroup = contacts.length !== 0 ? true : false;
+  // const onContactsFilter = contacts.length >= 2 ? true : false;
+
+  const onContactsGroup = true;
+  const onContactsFilter = true;
 
   const onChangeState = (name, number) => {
     if (matchCheckName(name, contacts)) {
       toastMsg(name, "warn");
       return "not success";
     }
-
-    const newContact = [{ id: nanoid(), name: name, number: number }];
-
-    setContacts([...contacts, ...newContact]);
 
     toastMsg(name, "success");
     return "success";
@@ -33,35 +40,9 @@ export default function App() {
     return false;
   };
 
-  const onFilter = (word) => {
-    setFilter(word ? word.toLowerCase() : "");
-  };
+  const onDelete = (id) => dispatch(deleteContact(id));
 
-  const onDelete = (id) => {
-    setContacts(
-      contacts.filter((contact) => {
-        if (contact.id === id) toastMsg(contact.name, "info");
-        return contact.id !== id;
-      })
-    );
-
-    if (contacts.length <= 1) {
-      onFilter();
-    }
-  };
-
-  useEffect(() => {
-    if (localStorage.getItem("contacts")) {
-      setContacts(JSON.parse(localStorage.getItem("contacts")));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-  }, [contacts]);
-
-  const onContactsGroup = contacts.length !== 0 ? true : false;
-  const onContactsFilter = contacts.length >= 2 ? true : false;
+  const onFilter = () => console.log("используем фильтр");
 
   return (
     <Container>
