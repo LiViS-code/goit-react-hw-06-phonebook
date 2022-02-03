@@ -21,7 +21,9 @@ export default function App() {
       return "not success";
     }
     dispatch(addContact(name, number));
+
     toastMsg(name, "success");
+
     return "success";
   };
 
@@ -32,11 +34,15 @@ export default function App() {
     return false;
   };
 
-  const onDelete = (id) => dispatch(deleteContact(id));
+  const onDelete = (id) => {
+    dispatch(deleteContact(id));
 
-  const onFilter = (word) => {
-    dispatch(filterContact(word));
+    if (contacts.length <= 2) {
+      onFilter("");
+    }
   };
+
+  const onFilter = (word) => dispatch(filterContact(word));
 
   return (
     <Container>
