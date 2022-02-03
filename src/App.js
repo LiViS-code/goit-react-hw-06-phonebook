@@ -1,4 +1,3 @@
-// import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import ContactForm from "./components/ContactForm/ContactForm";
@@ -7,28 +6,21 @@ import Filter from "./components/Filter/Filter";
 import { Container, Logo, Title, ContactsTitle, Message } from "./App.styled";
 import toastMsg from "./utils/toastMsg";
 import phonebook from "./img/phonebook.png";
-import { deleteContact } from "./redux/actions";
+import { addContact, deleteContact, filterContact } from "./redux/actions";
 
 export default function App() {
   const dispatch = useDispatch();
-
   const contacts = useSelector((state) => state.contacts.items);
   const filter = useSelector((state) => state.contacts.filter);
-
-  console.log("contacts :>>", contacts);
-
-  // const onContactsGroup = contacts.length !== 0 ? true : false;
-  // const onContactsFilter = contacts.length >= 2 ? true : false;
-
-  const onContactsGroup = true;
-  const onContactsFilter = true;
+  const onContactsGroup = contacts.length !== 0 ? true : false;
+  const onContactsFilter = contacts.length >= 2 ? true : false;
 
   const onChangeState = (name, number) => {
     if (matchCheckName(name, contacts)) {
       toastMsg(name, "warn");
       return "not success";
     }
-
+    dispatch(addContact(name, number));
     toastMsg(name, "success");
     return "success";
   };
@@ -42,7 +34,9 @@ export default function App() {
 
   const onDelete = (id) => dispatch(deleteContact(id));
 
-  const onFilter = () => console.log("используем фильтр");
+  const onFilter = (word) => {
+    dispatch(filterContact(word));
+  };
 
   return (
     <Container>
