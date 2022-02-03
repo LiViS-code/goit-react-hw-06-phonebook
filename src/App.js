@@ -15,8 +15,6 @@ export default function App() {
   const contacts = useSelector((state) => state.contacts);
   const filter = useSelector((state) => state.contacts.filter);
 
-  console.log("contacts", contacts);
-
   // const onContactsGroup = contacts.length !== 0 ? true : false;
   // const onContactsFilter = contacts.length >= 2 ? true : false;
 
