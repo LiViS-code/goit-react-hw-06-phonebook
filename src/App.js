@@ -12,8 +12,10 @@ import { deleteContact } from "./redux/actions";
 export default function App() {
   const dispatch = useDispatch();
 
-  const contacts = useSelector((state) => state.contacts);
+  const contacts = useSelector((state) => state.contacts.items);
   const filter = useSelector((state) => state.contacts.filter);
+
+  console.log("contacts :>>", contacts);
 
   // const onContactsGroup = contacts.length !== 0 ? true : false;
   // const onContactsFilter = contacts.length >= 2 ? true : false;
