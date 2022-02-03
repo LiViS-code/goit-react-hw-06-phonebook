@@ -34,8 +34,10 @@ export default function App() {
     return false;
   };
 
-  const onDelete = (id) => {
+  const onDelete = (id, name) => {
     dispatch(deleteContact(id));
+
+    toastMsg(name, "info");
 
     if (contacts.length <= 2) {
       onFilter("");

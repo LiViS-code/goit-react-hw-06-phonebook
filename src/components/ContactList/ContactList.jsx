@@ -30,7 +30,7 @@ export default function ContactList({ contacts, filter, onDelete }) {
           </ContactNote>
           <Button
             type="button"
-            onClick={() => onDelete(id)}
+            onClick={() => onDelete(id, name)}
             title="Delete this contact"
           >
             <IconContext.Provider
