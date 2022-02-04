@@ -8,9 +8,6 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "./constants/Theme";
 import App from "./App";
 
-console.log("store", store);
-console.log("persistor", persistor);
-
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>

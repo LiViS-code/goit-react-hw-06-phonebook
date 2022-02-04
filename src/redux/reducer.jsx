@@ -5,13 +5,13 @@ import { addContact, deleteContact, filterContact } from "./actions";
 // const contactsStorage = JSON.parse(localStorage.getItem("contacts") ?? []);
 
 const items = createReducer([], {
-  [addContact]: (state, actions) => [...state, actions.payload],
-  [deleteContact]: (state, actions) =>
-    state.filter((contact) => contact.id !== actions.payload),
+  [addContact]: (state, { payload }) => [...state, payload],
+  [deleteContact]: (state, { payload }) =>
+    state.filter((contact) => contact.id !== payload),
 });
 
 const filter = createReducer("", {
-  [filterContact]: (_, actions) => actions.payload,
+  [filterContact]: (_, { payload }) => payload,
 });
 
 export default combineReducers({
